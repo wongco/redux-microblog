@@ -1,4 +1,4 @@
-import { ADD_POST } from './actionTypes';
+import { ADD_POST, SAVE_POST } from './actionTypes';
 import uuid from 'uuid/v4';
 
 const INITIAL_STATE = {
@@ -22,6 +22,18 @@ function rootReducer(state = INITIAL_STATE, action) {
     case ADD_POST: {
       const newPost = {
         [uuid()]: { ...action.payload }
+      };
+      const newPosts = { ...state.posts, ...newPost };
+      return { ...state, posts: newPosts };
+    }
+
+    // action for saving existing post to redux-state
+    case SAVE_POST: {
+      const { id, post } = action.paylod;
+
+      // create updatedPost to overwrite
+      const newPost = {
+        [id]: post
       };
       const newPosts = { ...state.posts, ...newPost };
       return { ...state, posts: newPosts };

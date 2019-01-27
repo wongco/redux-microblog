@@ -10,24 +10,37 @@ const StyledInput = styled.input`
   width: 30vw;
 `;
 
+const StyledTextArea = styled.textarea`
+  width: 30vw;
+`;
+
 const StyledButton = styled.button`
   width: 60px;
   padding: 5px 10px;
 `;
 
+/** Component for adding a new Post to Redux State */
 class PostForm extends Component {
+  // controlled component input
   handleChange = evt => {
     this.setState({
       [evt.target.name]: evt.target.value
     });
   };
 
+  // invoke addPost actionCreator and then redirect to homepage
   handleSubmit = evt => {
     evt.preventDefault();
-    this.props.addPost({ ...this.state });
-    this.props.history.push('/');
+    if (this.props.isNewPost) {
+      this.props.addPost({ ...this.state });
+      this.props.history.push('/');
+    } else {
+      this.props.savePost(this.props.id, { ...this.state });
+      this.props.history.push(`/${this.props.id}`);
+    }
   };
 
+  // redirect to homepage
   handleCancel = () => {
     this.props.history.push('/');
   };
@@ -37,7 +50,6 @@ class PostForm extends Component {
       <div className="PostForm">
         <StyledForm onSubmit={this.handleSubmit}>
           <h3>New Post</h3>
-
           <label htmlFor="title">Title</label>
           <StyledInput
             type="text"
@@ -45,7 +57,6 @@ class PostForm extends Component {
             value={this.state.title}
             onChange={this.handleChange}
           />
-
           <label htmlFor="desc">Description</label>
           <StyledInput
             type="text"
@@ -53,13 +64,12 @@ class PostForm extends Component {
             value={this.state.description}
             onChange={this.handleChange}
           />
-
           <label htmlFor="body">Body</label>
-          <StyledInput
-            type="textarea"
+          <StyledTextArea
             name="body"
             value={this.state.body}
             onChange={this.handleChange}
+            rows={10}
           />
           <div>
             <StyledButton>Save</StyledButton>
@@ -73,14 +83,24 @@ class PostForm extends Component {
   }
 
   state = {
-    title: '',
-    description: '',
-    body: ''
+    title: this.props.post.title,
+    description: this.props.post.description,
+    body: this.props.post.body
   };
 }
 
 PostForm.propTypes = {};
 
-PostForm.defaultProps = {};
+PostForm.defaultProps = {
+  id: '1',
+  post: {
+    title: '',
+    description: '',
+    body: ''
+  },
+  isNewPost: true,
+  addPost: () => console.log('Placeholder for addPost function'),
+  savePost: () => console.log('Placeholder for savePost function')
+};
 
 export default PostForm;

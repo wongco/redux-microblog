@@ -4,6 +4,7 @@ import NavBar from './Components/NavBar';
 // import PostForm from './Components/PostForm';
 import styled from 'styled-components';
 import PostFormContainer from './Containers/PostFormContainer';
+import PostView from './Components/PostView';
 
 const StyledRoutes = styled.div`
   display: flex;
@@ -23,6 +24,11 @@ class Routes extends Component {
             exact
             path="/new"
             render={props => <PostFormContainer {...props} />}
+          />
+          <Route
+            exact
+            path="/:postId"
+            render={props => <PostView {...props} />}
           />
           <Route render={() => <div>CatchAllRoute</div>} />
         </Switch>

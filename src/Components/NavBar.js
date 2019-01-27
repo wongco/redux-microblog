@@ -4,15 +4,19 @@ import styled from 'styled-components';
 
 const StyledNav = styled.div`
   display: flex;
-  text-align: center;
   box-sizing: border-box;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: skyblue;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: lightgray;
   width: 100%;
-  border: 1px solid black;
-  padding: 20px 0;
+  border-radius: 5px;
+  padding: 50px 50px;
+`;
+
+const StyledNavTitle = styled.p`
+  font-size: 300%;
+  margin: 0px;
 `;
 
 const StyledNavLinkContainer = styled.div`
@@ -21,17 +25,23 @@ const StyledNavLinkContainer = styled.div`
   flex-direction: row;
 `;
 
+const StyledNavLink = styled(NavLink)`
+  padding-right: 10px;
+  text-decoration: none;
+  color: blue;
+`;
+
 class NavBar extends Component {
   render() {
     return (
       <StyledNav>
         <div>
-          <h1>Microblog</h1>
+          <StyledNavTitle>Microblog</StyledNavTitle>
           <p>Get in the Rithm of Blogging!</p>
         </div>
         <StyledNavLinkContainer>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/new">Add a new post</NavLink>
+          <StyledNavLink to="/">Blog</StyledNavLink>
+          <StyledNavLink to="/new">Add a new post</StyledNavLink>
         </StyledNavLinkContainer>
       </StyledNav>
     );
