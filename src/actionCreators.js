@@ -1,8 +1,8 @@
-import { TEST } from './actionTypes';
+import { ADD_POST } from './actionTypes';
 
-export function testActionCreator(payloadObj) {
+export function addPost(postDetails) {
   return {
-    type: TEST,
-    payload: payloadObj
+    type: ADD_POST,
+    payload: postDetails
   };
 }

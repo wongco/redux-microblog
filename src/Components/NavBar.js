@@ -4,10 +4,15 @@ import styled from 'styled-components';
 
 const StyledNav = styled.div`
   display: flex;
+  text-align: center;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   background-color: skyblue;
+  width: 100%;
+  border: 1px solid black;
+  padding: 20px 0;
 `;
 
 const StyledNavLinkContainer = styled.div`
