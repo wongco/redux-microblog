@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PostForm from '../Components/PostForm';
-import { addPost, savePost } from '../actionCreators';
+import { addPost, savePost, deletePost } from '../actionCreators';
 
 class PostFormContainer extends Component {
   render() {
@@ -23,7 +23,7 @@ function mapStateToProps(state, props) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { addPost, savePost }
+  { addPost, savePost, deletePost }
 );
 
 export default connectedComponent(PostFormContainer);

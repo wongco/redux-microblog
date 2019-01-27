@@ -31,18 +31,12 @@ class PostForm extends Component {
   // invoke addPost actionCreator and then redirect to homepage
   handleSubmit = evt => {
     evt.preventDefault();
-    if (this.props.isNewPost) {
-      this.props.addPost({ ...this.state });
-      this.props.history.push('/');
-    } else {
-      this.props.savePost(this.props.id, { ...this.state });
-      this.props.history.push(`/${this.props.id}`);
-    }
+    this.props.savePost({ ...this.state });
   };
 
   // redirect to homepage
   handleCancel = () => {
-    this.props.history.push('/');
+    this.props.cancel();
   };
 
   render() {
@@ -92,15 +86,13 @@ class PostForm extends Component {
 PostForm.propTypes = {};
 
 PostForm.defaultProps = {
-  id: '1',
   post: {
     title: '',
     description: '',
     body: ''
   },
-  isNewPost: true,
-  addPost: () => console.log('Placeholder for addPost function'),
-  savePost: () => console.log('Placeholder for savePost function')
+  savePost: () => console.log('Placeholder for savePost function'),
+  cancel: () => console.log('cancel')
 };
 
 export default PostForm;
