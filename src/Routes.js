@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
-// import PostForm from './Components/PostForm';
 import styled from 'styled-components';
 import NewPost from './Containers/NewPost';
-import PostView from './Components/PostView';
+import PostView from './Containers/PostView';
+import TitleList from './Containers/TitleList';
 
 const StyledRoutes = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ class Routes extends Component {
       <StyledRoutes>
         <NavBar />
         <Switch>
-          <Route exact path="/" render={() => <div>Home</div>} />
+          <Route exact path="/" render={() => <TitleList />} />
           <Route exact path="/new" render={props => <NewPost {...props} />} />
           <Route
             exact

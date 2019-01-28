@@ -29,7 +29,7 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     // action for saving existing post to redux-state
     case UPDATE_POST: {
-      const { id, post } = action.paylod;
+      const { id, post } = action.payload;
 
       // create updatedPost to overwrite
       const newPost = {
@@ -41,7 +41,7 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     // action for saving existing post to redux-state
     case DELETE_POST: {
-      const id = action.paylod.id;
+      const id = action.payload.id;
       const newPosts = { ...state.posts };
       delete newPosts[id];
       return { ...state, posts: newPosts };
