@@ -1,4 +1,4 @@
-import { ADD_POST, SAVE_POST, DELETE_POST } from './actionTypes';
+import { ADD_POST, UPDATE_POST, DELETE_POST } from './actionTypes';
 
 export function addPost(postDetails) {
   return {
@@ -9,7 +9,7 @@ export function addPost(postDetails) {
 
 export function savePost(id, post) {
   return {
-    type: SAVE_POST,
+    type: UPDATE_POST,
     payload: {
       id,
       post

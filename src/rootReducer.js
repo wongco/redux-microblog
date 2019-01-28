@@ -1,4 +1,4 @@
-import { ADD_POST, SAVE_POST, DELETE_POST } from './actionTypes';
+import { ADD_POST, UPDATE_POST, DELETE_POST } from './actionTypes';
 import uuid from 'uuid/v4';
 
 const INITIAL_STATE = {
@@ -28,7 +28,7 @@ function rootReducer(state = INITIAL_STATE, action) {
     }
 
     // action for saving existing post to redux-state
-    case SAVE_POST: {
+    case UPDATE_POST: {
       const { id, post } = action.paylod;
 
       // create updatedPost to overwrite

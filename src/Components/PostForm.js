@@ -43,7 +43,6 @@ class PostForm extends Component {
     return (
       <div className="PostForm">
         <StyledForm onSubmit={this.handleSubmit}>
-          <h3>New Post</h3>
           <label htmlFor="title">Title</label>
           <StyledInput
             type="text"

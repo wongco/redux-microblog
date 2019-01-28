@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 // import PostForm from './Components/PostForm';
 import styled from 'styled-components';
-import PostFormContainer from './Containers/PostFormContainer';
+import NewPost from './Containers/NewPost';
 import PostView from './Components/PostView';
 
 const StyledRoutes = styled.div`
@@ -20,11 +20,7 @@ class Routes extends Component {
         <NavBar />
         <Switch>
           <Route exact path="/" render={() => <div>Home</div>} />
-          <Route
-            exact
-            path="/new"
-            render={props => <PostFormContainer {...props} />}
-          />
+          <Route exact path="/new" render={props => <NewPost {...props} />} />
           <Route
             exact
             path="/:postId"
