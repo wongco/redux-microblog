@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PostDetails from '../Components/PostDetails';
 import {
   deletePost,
-  savePost,
+  updatePostToAPI,
   deleteComment,
   addComment,
-  getPost
+  getPostDetailsFromAPI
 } from '../actionCreators';
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
@@ -19,7 +19,7 @@ class PostView extends Component {
 
     // if post doesnt exist in redux state, make api call to obtain it
     if (this.props.post.title.length === 0) {
-      this.props.getPost(postId);
+      this.props.getPostDetailsFromAPI(postId);
     }
   }
 
@@ -36,7 +36,7 @@ class PostView extends Component {
 
   savePost = post => {
     const { postId } = this.props.match.params;
-    this.props.savePost(postId, post);
+    this.props.updatePostToAPI(postId, post);
     this.props.history.replace('/');
   };
 
@@ -106,7 +106,13 @@ function mapStateToProps(state, props) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { deletePost, savePost, deleteComment, addComment, getPost }
+  {
+    deletePost,
+    updatePostToAPI,
+    deleteComment,
+    addComment,
+    getPostDetailsFromAPI
+  }
 );
 
 export default connectedComponent(PostView);

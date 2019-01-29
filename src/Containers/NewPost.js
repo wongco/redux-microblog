@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PostForm from '../Components/PostForm';
-import { addPost } from '../actionCreators';
+import { addPostToAPI } from '../actionCreators';
 
 class NewPost extends Component {
   addPost = postDetails => {
-    this.props.addPost(postDetails);
+    this.props.addPostToAPI(postDetails);
     this.props.history.push('/');
   };
 
@@ -24,7 +24,7 @@ class NewPost extends Component {
 
 const connectedComponent = connect(
   null,
-  { addPost }
+  { addPostToAPI }
 );
 
 export default connectedComponent(NewPost);

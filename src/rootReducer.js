@@ -5,7 +5,9 @@ import {
   DELETE_COMMENT,
   ADD_COMMENT,
   LOAD_POST,
-  LOAD_TITLE
+  LOAD_TITLE,
+  ADD_TITLE,
+  UPDATE_TITLE
 } from './actionTypes';
 import uuid from 'uuid/v4';
 
@@ -35,9 +37,10 @@ function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     // action for adding new post to redux-state
     case ADD_POST: {
-      const newPost = {
-        [uuid()]: { ...action.payload, comments: {} }
-      };
+      // const newPost = {
+      //   [uuid()]: { ...action.payload, comments: {} }
+      // };
+      const newPost = action.payload;
       const newPosts = { ...state.posts, ...newPost };
       return { ...state, posts: newPosts };
     }
@@ -94,6 +97,20 @@ function rootReducer(state = INITIAL_STATE, action) {
       const newPost = action.payload;
       const newPosts = { ...state.posts, ...newPost };
       return { ...state, posts: newPosts };
+    }
+
+    // action for adding title to redux-state
+    case ADD_TITLE: {
+      const titleObj = action.payload;
+      const newTitles = { ...state.titles, ...titleObj };
+      return { ...state, titles: newTitles };
+    }
+
+    // action for adding title to redux-state
+    case UPDATE_TITLE: {
+      const titleObj = action.payload;
+      const newTitles = { ...state.titles, ...titleObj };
+      return { ...state, titles: newTitles };
     }
 
     default: {

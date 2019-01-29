@@ -6,7 +6,9 @@ import {
   DELETE_COMMENT,
   ADD_COMMENT,
   LOAD_POST,
-  LOAD_TITLE
+  LOAD_TITLE,
+  ADD_TITLE,
+  UPDATE_TITLE
 } from './actionTypes';
 
 const BASE_API_URL = 'http://localhost:5000/api/posts';
@@ -35,15 +37,19 @@ export function getTitlesFromAPI() {
 }
 
 // action create using thunks to get Post Detail Info from API
-export function getPost(postId) {
+export function getPostDetailsFromAPI(postId) {
   return async function(dispatch) {
     try {
       const res = await axios.get(`${BASE_API_URL}/${postId}`);
       const { id, comments, votes, ...post } = res.data;
+
+      // convert commentsArr into commentsObj
       const commentsObj = {};
       comments.forEach(comment => {
         commentsObj[comment.id] = comment.text;
       });
+
+      // create formatted new post for insertion into redux state
       const newPost = {
         [id]: {
           ...post,
@@ -51,6 +57,74 @@ export function getPost(postId) {
         }
       };
       dispatch(loadPost(newPost));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
+// action create using thunks to get Post Detail Info from API
+export function addPostToAPI(postDetails) {
+  return async function(dispatch) {
+    try {
+      const res = await axios({
+        url: `${BASE_API_URL}/`,
+        method: 'post',
+        data: postDetails
+      });
+      const { id, votes, title, description, body } = res.data;
+
+      // create formatted new post for insertion into redux state
+      const newPost = {
+        [id]: {
+          title,
+          description,
+          body,
+          comments: {}
+        }
+      };
+
+      // create formatted new title for insertion into redux state
+      const newTitle = {
+        [id]: {
+          title,
+          description,
+          votes
+        }
+      };
+
+      dispatch(addPost(newPost));
+      dispatch(addTitle(newTitle));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
+// action create using thunks to get Post Detail Info from API
+export function updatePostToAPI(postId, postDetails) {
+  return async function(dispatch) {
+    try {
+      await axios({
+        url: `${BASE_API_URL}/${postId}`,
+        method: 'put',
+        data: postDetails
+      });
+
+      const { title, description } = postDetails;
+
+      const updateTitleObj = {
+        [postId]: {
+          title,
+          description,
+          votes: 0
+        }
+      };
+
+      dispatch(savePost(postId, postDetails));
+      dispatch(updateTitle(updateTitleObj));
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
@@ -69,6 +143,20 @@ export function loadTitles(titles) {
   return {
     type: LOAD_TITLE,
     payload: titles
+  };
+}
+
+export function addTitle(titleObj) {
+  return {
+    type: ADD_TITLE,
+    payload: titleObj
+  };
+}
+
+export function updateTitle(titleObj) {
+  return {
+    type: UPDATE_TITLE,
+    payload: titleObj
   };
 }
 
