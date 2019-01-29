@@ -30,10 +30,6 @@ class PostView extends Component {
     this.props.history.replace('/');
   };
 
-  cancel = () => {
-    this.props.history.push('/');
-  };
-
   deleteComment = commentId => {
     const { postId } = this.props.match.params;
     this.props.deleteComment(postId, commentId);
@@ -52,7 +48,7 @@ class PostView extends Component {
           <PostForm
             post={this.props.post}
             savePost={this.savePost}
-            cancel={this.cancel}
+            cancel={this.toggleEdit}
           />
         ) : (
           <PostDetails

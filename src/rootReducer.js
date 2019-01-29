@@ -51,7 +51,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       return { ...state, posts: newPosts };
     }
 
-    // action for saving existing post to redux-state
+    // action for deleting post in redux-state
     case DELETE_POST: {
       const id = action.payload.id;
       const newPosts = { ...state.posts };
@@ -59,7 +59,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       return { ...state, posts: newPosts };
     }
 
-    // action for saving existing post to redux-state
+    // action for deleting comment in redux-state
     case DELETE_COMMENT: {
       const { postId, commentId } = action.payload;
       const newPost = { ...state.posts[postId] };
@@ -68,7 +68,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       return { ...state, posts: newPosts };
     }
 
-    // action for saving existing post to redux-state
+    // action for saving new comment to redux-state
     case ADD_COMMENT: {
       const { postId, comment } = action.payload;
       const newComments = {
