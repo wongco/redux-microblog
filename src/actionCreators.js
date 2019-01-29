@@ -151,6 +151,49 @@ export function deletePostFromAPI(postId) {
   };
 }
 
+// action create using thunks to add comment to API
+export function addCommentToAPI(postId, comment) {
+  return async function(dispatch) {
+    try {
+      const res = await axios({
+        url: `${BASE_API_URL}/${postId}/comments`,
+        method: 'post',
+        data: {
+          text: comment
+        }
+      });
+
+      const { id, text } = res.data;
+
+      const commentObj = {
+        [id]: text
+      };
+
+      dispatch(addComment(postId, commentObj));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
+// action create using thunks to add delete comment API
+export function deleteCommentFromAPI(postId, commentId) {
+  return async function(dispatch) {
+    try {
+      await axios({
+        url: `${BASE_API_URL}/${postId}/comments/${commentId}`,
+        method: 'delete'
+      });
+
+      dispatch(deleteComment(postId, commentId));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
 export function loadPost(postDetails) {
   return {
     type: LOAD_POST,
@@ -224,12 +267,12 @@ export function deleteComment(postId, commentId) {
   };
 }
 
-export function addComment(postId, comment) {
+export function addComment(postId, commentObj) {
   return {
     type: ADD_COMMENT,
     payload: {
       postId,
-      comment
+      commentObj
     }
   };
 }

@@ -10,27 +10,9 @@ import {
   UPDATE_TITLE,
   DELETE_TITLE
 } from './actionTypes';
-import uuid from 'uuid/v4';
 
 const INITIAL_STATE = {
-  posts: {
-    // 1234: {
-    //   title: 'Amazing things',
-    //   description: 'an excercise in biting the dust',
-    //   body: 'eating all day all night lorem ipsum another one bites the dust',
-    //   comments: {
-    //     12: 'hello, i like amazing things'
-    //   }
-    // },
-    // 22543: {
-    //   title: 'Second wave',
-    //   description: 'how the second one came and saved the day',
-    //   body: 'lorem ipsum eating things saving the day again',
-    //   comments: {
-    //     23: 'second is always the best after first'
-    //   }
-    // }
-  },
+  posts: {},
   titles: {}
 };
 
@@ -74,10 +56,10 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     // action for saving new comment to redux-state
     case ADD_COMMENT: {
-      const { postId, comment } = action.payload;
+      const { postId, commentObj } = action.payload;
       const newComments = {
         ...state.posts[postId].comments,
-        [uuid()]: comment
+        ...commentObj
       };
       const newPost = { ...state.posts[postId], comments: newComments };
       const newPosts = { ...state.posts, [postId]: newPost };

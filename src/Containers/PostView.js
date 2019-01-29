@@ -4,8 +4,8 @@ import PostDetails from '../Components/PostDetails';
 import {
   deletePostFromAPI,
   updatePostToAPI,
-  deleteComment,
-  addComment,
+  deleteCommentFromAPI,
+  addCommentToAPI,
   getPostDetailsFromAPI
 } from '../actionCreators';
 import PostForm from '../Components/PostForm';
@@ -42,12 +42,12 @@ class PostView extends Component {
 
   deleteComment = commentId => {
     const { postId } = this.props.match.params;
-    this.props.deleteComment(postId, commentId);
+    this.props.deleteCommentFromAPI(postId, commentId);
   };
 
   addComment = comment => {
     const { postId } = this.props.match.params;
-    this.props.addComment(postId, comment);
+    this.props.addCommentToAPI(postId, comment);
   };
 
   render() {
@@ -109,8 +109,8 @@ const connectedComponent = connect(
   {
     deletePostFromAPI,
     updatePostToAPI,
-    deleteComment,
-    addComment,
+    deleteCommentFromAPI,
+    addCommentToAPI,
     getPostDetailsFromAPI
   }
 );
