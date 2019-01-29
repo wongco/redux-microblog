@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getTitlesFromAPI } from '../actionCreators';
 
 const StyledTitleList = styled.div`
   display: flex;
@@ -26,11 +27,17 @@ const StyledTitleCard = styled.div`
 `;
 
 class TitleList extends Component {
+  async componentDidMount() {
+    if (Object.keys(this.props.titles).length === 0) {
+      await this.props.getTitlesFromAPI();
+    }
+  }
+
   render() {
     return (
       <StyledTitleList>
-        {Object.keys(this.props.posts).map(id => {
-          const { title, description } = this.props.posts[id];
+        {Object.keys(this.props.titles).map(id => {
+          const { title, description } = this.props.titles[id];
           return (
             <StyledTitleCard key={id}>
               <Link to={`/${id}`}>
@@ -47,10 +54,13 @@ class TitleList extends Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    titles: state.titles
   };
 }
 
-const connectedComponent = connect(mapStateToProps);
+const connectedComponent = connect(
+  mapStateToProps,
+  { getTitlesFromAPI }
+);
 
 export default connectedComponent(TitleList);

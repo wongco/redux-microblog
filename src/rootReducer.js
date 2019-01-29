@@ -3,29 +3,31 @@ import {
   UPDATE_POST,
   DELETE_POST,
   DELETE_COMMENT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  LOAD_POSTS
 } from './actionTypes';
 import uuid from 'uuid/v4';
 
 const INITIAL_STATE = {
   posts: {
-    1234: {
-      title: 'Amazing things',
-      description: 'an excercise in biting the dust',
-      body: 'eating all day all night lorem ipsum another one bites the dust',
-      comments: {
-        12: 'hello, i like amazing things'
-      }
-    },
-    22543: {
-      title: 'Second wave',
-      description: 'how the second one came and saved the day',
-      body: 'lorem ipsum eating things saving the day again',
-      comments: {
-        23: 'second is always the best after first'
-      }
-    }
-  }
+    // 1234: {
+    //   title: 'Amazing things',
+    //   description: 'an excercise in biting the dust',
+    //   body: 'eating all day all night lorem ipsum another one bites the dust',
+    //   comments: {
+    //     12: 'hello, i like amazing things'
+    //   }
+    // },
+    // 22543: {
+    //   title: 'Second wave',
+    //   description: 'how the second one came and saved the day',
+    //   body: 'lorem ipsum eating things saving the day again',
+    //   comments: {
+    //     23: 'second is always the best after first'
+    //   }
+    // }
+  },
+  titles: {}
 };
 
 function rootReducer(state = INITIAL_STATE, action) {
@@ -78,6 +80,18 @@ function rootReducer(state = INITIAL_STATE, action) {
       const newPost = { ...state.posts[postId], comments: newComments };
       const newPosts = { ...state.posts, [postId]: newPost };
       return { ...state, posts: newPosts };
+    }
+
+    // action for saving new comment to redux-state
+    case LOAD_POSTS: {
+      const titles = action.payload;
+      // const newComments = {
+      //   ...state.posts[postId].comments,
+      //   [uuid()]: comment
+      // };
+      // const newPost = { ...state.posts[postId], comments: newComments };
+      // const newPosts = { ...state.posts, [postId]: newPost };
+      return { ...state, titles };
     }
 
     default: {
