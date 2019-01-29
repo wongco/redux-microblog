@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostDetails from '../Components/PostDetails';
-import { deletePost, savePost, deleteComment } from '../actionCreators';
+import {
+  deletePost,
+  savePost,
+  deleteComment,
+  addComment
+} from '../actionCreators';
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
+import NewComment from '../Components/NewComment';
 // import styled from 'styled-components';
 
 class PostView extends Component {
@@ -33,6 +39,11 @@ class PostView extends Component {
     this.props.deleteComment(postId, commentId);
   };
 
+  addComment = comment => {
+    const { postId } = this.props.match.params;
+    this.props.addComment(postId, comment);
+  };
+
   render() {
     const { comments } = this.props.post;
     return (
@@ -54,11 +65,12 @@ class PostView extends Component {
           return (
             <Comment
               id={id}
-              comment={comments[id].comment}
+              comment={comments[id]}
               deleteComment={this.deleteComment}
             />
           );
         })}
+        <NewComment addComment={this.addComment} />
       </div>
     );
   }
@@ -85,7 +97,7 @@ function mapStateToProps(state, props) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { deletePost, savePost, deleteComment }
+  { deletePost, savePost, deleteComment, addComment }
 );
 
 export default connectedComponent(PostView);

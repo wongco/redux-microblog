@@ -2,7 +2,8 @@ import {
   ADD_POST,
   UPDATE_POST,
   DELETE_POST,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  ADD_COMMENT
 } from './actionTypes';
 import uuid from 'uuid/v4';
 
@@ -13,9 +14,7 @@ const INITIAL_STATE = {
       description: 'an excercise in biting the dust',
       body: 'eating all day all night lorem ipsum another one bites the dust',
       comments: {
-        12: {
-          comment: 'hello, i like amazing things'
-        }
+        12: 'hello, i like amazing things'
       }
     },
     22543: {
@@ -23,9 +22,7 @@ const INITIAL_STATE = {
       description: 'how the second one came and saved the day',
       body: 'lorem ipsum eating things saving the day again',
       comments: {
-        23: {
-          comment: 'second is always the best after first'
-        }
+        23: 'second is always the best after first'
       }
     }
   }
@@ -67,6 +64,18 @@ function rootReducer(state = INITIAL_STATE, action) {
       const { postId, commentId } = action.payload;
       const newPost = { ...state.posts[postId] };
       delete newPost.comments[commentId];
+      const newPosts = { ...state.posts, [postId]: newPost };
+      return { ...state, posts: newPosts };
+    }
+
+    // action for saving existing post to redux-state
+    case ADD_COMMENT: {
+      const { postId, comment } = action.payload;
+      const newComments = {
+        ...state.posts[postId].comments,
+        [uuid()]: comment
+      };
+      const newPost = { ...state.posts[postId], comments: newComments };
       const newPosts = { ...state.posts, [postId]: newPost };
       return { ...state, posts: newPosts };
     }

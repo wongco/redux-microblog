@@ -2,7 +2,8 @@ import {
   ADD_POST,
   UPDATE_POST,
   DELETE_POST,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  ADD_COMMENT
 } from './actionTypes';
 
 export function addPost(postDetails) {
@@ -37,6 +38,16 @@ export function deleteComment(postId, commentId) {
     payload: {
       postId,
       commentId
+    }
+  };
+}
+
+export function addComment(postId, comment) {
+  return {
+    type: ADD_COMMENT,
+    payload: {
+      postId,
+      comment
     }
   };
 }
