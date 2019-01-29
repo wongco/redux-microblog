@@ -4,7 +4,7 @@ import NavBar from './Components/NavBar';
 import styled from 'styled-components';
 import NewPost from './Containers/NewPost';
 import PostView from './Containers/PostView';
-import TitleList from './Containers/TitleList';
+import Home from './Components/Home';
 
 const StyledRoutes = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ class Routes extends Component {
       <StyledRoutes>
         <NavBar />
         <Switch>
-          <Route exact path="/" render={() => <TitleList />} />
+          <Route exact path="/" render={() => <Home />} />
           <Route exact path="/new" render={props => <NewPost {...props} />} />
           <Route
             exact
