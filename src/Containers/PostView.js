@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostDetails from '../Components/PostDetails';
 import {
-  deletePost,
+  deletePostFromAPI,
   updatePostToAPI,
   deleteComment,
   addComment,
@@ -30,7 +30,7 @@ class PostView extends Component {
 
   deletePost = () => {
     const { postId } = this.props.match.params;
-    this.props.deletePost(postId);
+    this.props.deletePostFromAPI(postId);
     this.props.history.replace('/');
   };
 
@@ -107,7 +107,7 @@ function mapStateToProps(state, props) {
 const connectedComponent = connect(
   mapStateToProps,
   {
-    deletePost,
+    deletePostFromAPI,
     updatePostToAPI,
     deleteComment,
     addComment,

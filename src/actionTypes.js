@@ -7,3 +7,4 @@ export const LOAD_POST = 'LOAD_POST';
 export const LOAD_TITLE = 'LOAD_TITLE';
 export const ADD_TITLE = 'ADD_TITLE';
 export const UPDATE_TITLE = 'UPDATE_TITLE';
+export const DELETE_TITLE = 'DELETE_TITLE';

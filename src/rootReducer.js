@@ -7,7 +7,8 @@ import {
   LOAD_POST,
   LOAD_TITLE,
   ADD_TITLE,
-  UPDATE_TITLE
+  UPDATE_TITLE,
+  DELETE_TITLE
 } from './actionTypes';
 import uuid from 'uuid/v4';
 
@@ -107,6 +108,14 @@ function rootReducer(state = INITIAL_STATE, action) {
     case UPDATE_TITLE: {
       const titleObj = action.payload;
       const newTitles = { ...state.titles, ...titleObj };
+      return { ...state, titles: newTitles };
+    }
+
+    // action for adding title to redux-state
+    case DELETE_TITLE: {
+      const { postId } = action.payload;
+      const newTitles = { ...state.titles };
+      delete newTitles[postId];
       return { ...state, titles: newTitles };
     }
 

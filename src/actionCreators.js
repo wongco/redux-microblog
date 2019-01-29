@@ -8,7 +8,8 @@ import {
   LOAD_POST,
   LOAD_TITLE,
   ADD_TITLE,
-  UPDATE_TITLE
+  UPDATE_TITLE,
+  DELETE_TITLE
 } from './actionTypes';
 
 const BASE_API_URL = 'http://localhost:5000/api/posts';
@@ -132,6 +133,24 @@ export function updatePostToAPI(postId, postDetails) {
   };
 }
 
+// action create using thunks to delete Post from API
+export function deletePostFromAPI(postId) {
+  return async function(dispatch) {
+    try {
+      await axios({
+        url: `${BASE_API_URL}/${postId}`,
+        method: 'delete'
+      });
+
+      dispatch(deletePost(postId));
+      dispatch(deleteTitle(postId));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
 export function loadPost(postDetails) {
   return {
     type: LOAD_POST,
@@ -150,6 +169,15 @@ export function addTitle(titleObj) {
   return {
     type: ADD_TITLE,
     payload: titleObj
+  };
+}
+
+export function deleteTitle(postId) {
+  return {
+    type: DELETE_TITLE,
+    payload: {
+      postId
+    }
   };
 }
 
