@@ -103,7 +103,7 @@ export function addPostToAPI(postDetails) {
   };
 }
 
-// action create using thunks to get Post Detail Info from API
+// action create using thunks to update Post Detail Info to API
 export function updatePostToAPI(postId, postDetails) {
   return async function(dispatch) {
     try {
@@ -123,7 +123,7 @@ export function updatePostToAPI(postId, postDetails) {
         }
       };
 
-      dispatch(savePost(postId, postDetails));
+      dispatch(updatePost(postId, postDetails));
       dispatch(updateTitle(updateTitleObj));
     } catch (error) {
       console.log('Error getting info from API');
@@ -167,7 +167,7 @@ export function addPost(postDetails) {
   };
 }
 
-export function savePost(id, post) {
+export function updatePost(id, post) {
   return {
     type: UPDATE_POST,
     payload: {

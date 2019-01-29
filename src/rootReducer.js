@@ -37,9 +37,6 @@ function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     // action for adding new post to redux-state
     case ADD_POST: {
-      // const newPost = {
-      //   [uuid()]: { ...action.payload, comments: {} }
-      // };
       const newPost = action.payload;
       const newPosts = { ...state.posts, ...newPost };
       return { ...state, posts: newPosts };
