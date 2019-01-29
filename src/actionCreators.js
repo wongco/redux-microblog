@@ -1,4 +1,9 @@
-import { ADD_POST, UPDATE_POST, DELETE_POST } from './actionTypes';
+import {
+  ADD_POST,
+  UPDATE_POST,
+  DELETE_POST,
+  DELETE_COMMENT
+} from './actionTypes';
 
 export function addPost(postDetails) {
   return {
@@ -22,6 +27,16 @@ export function deletePost(id) {
     type: DELETE_POST,
     payload: {
       id
+    }
+  };
+}
+
+export function deleteComment(postId, commentId) {
+  return {
+    type: DELETE_COMMENT,
+    payload: {
+      postId,
+      commentId
     }
   };
 }

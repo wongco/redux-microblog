@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostDetails from '../Components/PostDetails';
-import { deletePost, savePost } from '../actionCreators';
+import { deletePost, savePost, deleteComment } from '../actionCreators';
 import PostForm from '../Components/PostForm';
+import Comment from '../Components/Comment';
 // import styled from 'styled-components';
 
 class PostView extends Component {
@@ -27,24 +28,39 @@ class PostView extends Component {
     this.props.history.push('/');
   };
 
+  deleteComment = commentId => {
+    const { postId } = this.props.match.params;
+    this.props.deleteComment(postId, commentId);
+  };
+
   render() {
-    if (this.state.isEditing) {
-      return (
-        <PostForm
-          post={this.props.post}
-          savePost={this.savePost}
-          cancel={this.cancel}
-        />
-      );
-    } else {
-      return (
-        <PostDetails
-          post={this.props.post}
-          deletePost={this.deletePost}
-          toggleEdit={this.toggleEdit}
-        />
-      );
-    }
+    const { comments } = this.props.post;
+    return (
+      <div>
+        {this.state.isEditing ? (
+          <PostForm
+            post={this.props.post}
+            savePost={this.savePost}
+            cancel={this.cancel}
+          />
+        ) : (
+          <PostDetails
+            post={this.props.post}
+            deletePost={this.deletePost}
+            toggleEdit={this.toggleEdit}
+          />
+        )}
+        {Object.keys(comments).map(id => {
+          return (
+            <Comment
+              id={id}
+              comment={comments[id].comment}
+              deleteComment={this.deleteComment}
+            />
+          );
+        })}
+      </div>
+    );
   }
 
   state = {
@@ -62,7 +78,6 @@ PostView.defaultProps = {
 
 function mapStateToProps(state, props) {
   const { postId } = props.match.params;
-  console.log(postId);
   return {
     post: state.posts[postId]
   };
@@ -70,7 +85,7 @@ function mapStateToProps(state, props) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { deletePost, savePost }
+  { deletePost, savePost, deleteComment }
 );
 
 export default connectedComponent(PostView);
