@@ -5,7 +5,8 @@ import {
   DELETE_POST,
   DELETE_COMMENT,
   ADD_COMMENT,
-  LOAD_POSTS
+  LOAD_POST,
+  LOAD_TITLE
 } from './actionTypes';
 
 const BASE_API_URL = 'http://localhost:5000/api/posts';
@@ -13,24 +14,60 @@ const BASE_API_URL = 'http://localhost:5000/api/posts';
 // action creator using thunks to grab info from API
 export function getTitlesFromAPI() {
   return async function(dispatch) {
-    const res = await axios.get(`${BASE_API_URL}`);
-    const titlesArr = res.data;
-    const titles = {};
-    titlesArr.forEach(post => {
-      const { id, title, description, votes } = post;
-      titles[id] = {
-        title,
-        description,
-        votes
-      };
-    });
-    dispatch(loadPost(titles));
+    try {
+      const res = await axios.get(`${BASE_API_URL}`);
+      const titlesArr = res.data;
+      const titles = {};
+      titlesArr.forEach(post => {
+        const { id, title, description, votes } = post;
+        titles[id] = {
+          title,
+          description,
+          votes
+        };
+      });
+      dispatch(loadTitles(titles));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
   };
 }
 
-export function loadPost(titles) {
+// action create using thunks to get Post Detail Info from API
+export function getPost(postId) {
+  return async function(dispatch) {
+    try {
+      const res = await axios.get(`${BASE_API_URL}/${postId}`);
+      const { id, comments, votes, ...post } = res.data;
+      const commentsObj = {};
+      comments.forEach(comment => {
+        commentsObj[comment.id] = comment.text;
+      });
+      const newPost = {
+        [id]: {
+          ...post,
+          comments: commentsObj
+        }
+      };
+      dispatch(loadPost(newPost));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
+export function loadPost(postDetails) {
   return {
-    type: LOAD_POSTS,
+    type: LOAD_POST,
+    payload: postDetails
+  };
+}
+
+export function loadTitles(titles) {
+  return {
+    type: LOAD_TITLE,
     payload: titles
   };
 }

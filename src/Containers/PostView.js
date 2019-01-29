@@ -5,7 +5,8 @@ import {
   deletePost,
   savePost,
   deleteComment,
-  addComment
+  addComment,
+  getPost
 } from '../actionCreators';
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
@@ -13,6 +14,15 @@ import NewComment from '../Components/NewComment';
 // import styled from 'styled-components';
 
 class PostView extends Component {
+  componentDidMount() {
+    const { postId } = this.props.match.params;
+
+    // if post doesnt exist in redux state, make api call to obtain it
+    if (this.props.post.title.length === 0) {
+      this.props.getPost(postId);
+    }
+  }
+
   /** toggles view to edit view */
   toggleEdit = () => {
     this.setState(st => ({ isEditing: !st.isEditing }));
@@ -61,6 +71,7 @@ class PostView extends Component {
           return (
             <Comment
               id={id}
+              key={id}
               comment={comments[id]}
               deleteComment={this.deleteComment}
             />
@@ -78,10 +89,12 @@ class PostView extends Component {
 
 PostView.defaultProps = {
   post: {
-    title: 'Amazing thingsk',
-    description: 'an excercise in biting the dust',
-    body: 'eating all day all night lorem ipsum another one bites the dust'
-  }
+    title: '',
+    description: '',
+    body: '',
+    comments: {}
+  },
+  getPost: () => console.log('Getting POST from redux/API')
 };
 
 function mapStateToProps(state, props) {
@@ -93,7 +106,7 @@ function mapStateToProps(state, props) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { deletePost, savePost, deleteComment, addComment }
+  { deletePost, savePost, deleteComment, addComment, getPost }
 );
 
 export default connectedComponent(PostView);

@@ -4,7 +4,8 @@ import {
   DELETE_POST,
   DELETE_COMMENT,
   ADD_COMMENT,
-  LOAD_POSTS
+  LOAD_POST,
+  LOAD_TITLE
 } from './actionTypes';
 import uuid from 'uuid/v4';
 
@@ -82,16 +83,17 @@ function rootReducer(state = INITIAL_STATE, action) {
       return { ...state, posts: newPosts };
     }
 
-    // action for saving new comment to redux-state
-    case LOAD_POSTS: {
+    // action for loading title to redux-state
+    case LOAD_TITLE: {
       const titles = action.payload;
-      // const newComments = {
-      //   ...state.posts[postId].comments,
-      //   [uuid()]: comment
-      // };
-      // const newPost = { ...state.posts[postId], comments: newComments };
-      // const newPosts = { ...state.posts, [postId]: newPost };
       return { ...state, titles };
+    }
+
+    // action for loading post to redux-state
+    case LOAD_POST: {
+      const newPost = action.payload;
+      const newPosts = { ...state.posts, ...newPost };
+      return { ...state, posts: newPosts };
     }
 
     default: {
