@@ -39,6 +39,7 @@ class PostView extends Component {
     } else {
       return (
         <PostDetails
+          post={this.props.post}
           deletePost={this.deletePost}
           toggleEdit={this.toggleEdit}
         />
@@ -53,7 +54,7 @@ class PostView extends Component {
 
 PostView.defaultProps = {
   post: {
-    title: 'Amazing things',
+    title: 'Amazing thingsk',
     description: 'an excercise in biting the dust',
     body: 'eating all day all night lorem ipsum another one bites the dust'
   }
@@ -61,6 +62,7 @@ PostView.defaultProps = {
 
 function mapStateToProps(state, props) {
   const { postId } = props.match.params;
+  console.log(postId);
   return {
     post: state.posts[postId]
   };

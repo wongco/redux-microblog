@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 
+const StyledPostDetail = styled.div`
+  width: 50vw;
+`;
+
+const StyledHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+`;
 class PostDetails extends Component {
   handleEdit = () => {
     this.props.toggleEdit();
@@ -13,8 +24,8 @@ class PostDetails extends Component {
   render() {
     const { title, description, body } = this.props.post;
     return (
-      <div>
-        <div>
+      <StyledPostDetail>
+        <StyledHeader>
           <div>
             <h1>{title}</h1>
             <div>{description}</div>
@@ -23,9 +34,9 @@ class PostDetails extends Component {
             <button onClick={this.handleEdit}>Edit Post</button>
             <button onClick={this.handleDelete}>Delete Post</button>
           </div>
-        </div>
+        </StyledHeader>
         <div>{body}</div>
-      </div>
+      </StyledPostDetail>
     );
   }
 }
