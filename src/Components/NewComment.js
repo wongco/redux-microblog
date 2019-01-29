@@ -5,6 +5,7 @@ class NewComment extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     this.props.addComment(this.state.comment);
+    this.setState({ comment: '' });
   };
 
   handleChange = evt => {
