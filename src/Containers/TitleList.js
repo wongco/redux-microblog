@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getTitlesFromAPI } from '../actionCreators';
+import { getTitlesFromAPI, voteToApi } from '../actionCreators';
 import Vote from '../Components/Vote';
 
 const StyledTitleList = styled.div`
@@ -20,6 +20,9 @@ const StyledTitleContainer = styled.div`
   align-self: flex-start;
   border: 1px solid lightgray;
   border-radius: 5px;
+  box-shadow: 0px 2px 18px gray;
+  box-sizing: border-box;
+  padding: 20px;
 `;
 
 const StyledTitleCard = styled.div`
@@ -27,10 +30,6 @@ const StyledTitleCard = styled.div`
   flex-direction: column;
   justify-content: space-around;
   border-bottom: 1px solid lightgray;
-  /* box-shadow: 0px 2px 18px gray; */
-  /* border-radius: 5px; */
-  /* margin: 20px; */
-  padding: 20px;
   height: 75px;
   width: 20vw;
 `;
@@ -48,14 +47,18 @@ class TitleList extends Component {
         {Object.keys(this.props.titles).map(id => {
           const { title, description, votes } = this.props.titles[id];
           return (
-            <StyledTitleContainer>
-              <StyledTitleCard key={id}>
+            <StyledTitleContainer key={id}>
+              <StyledTitleCard>
                 <Link to={`/${id}`}>
                   <div>{title}</div>
                 </Link>
                 <div>{description}</div>
               </StyledTitleCard>
-              <Vote id={id} votes={votes} />
+              <Vote
+                id={id}
+                votes={votes}
+                voteAction={dir => this.props.voteToApi(dir, id)}
+              />
             </StyledTitleContainer>
           );
         })}
@@ -72,7 +75,7 @@ function mapStateToProps(state) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { getTitlesFromAPI }
+  { getTitlesFromAPI, voteToApi }
 );
 
 export default connectedComponent(TitleList);

@@ -8,3 +8,5 @@ export const LOAD_TITLE = 'LOAD_TITLE';
 export const ADD_TITLE = 'ADD_TITLE';
 export const UPDATE_TITLE = 'UPDATE_TITLE';
 export const DELETE_TITLE = 'DELETE_TITLE';
+export const UPDATE_POST_VOTE = 'UPDATE_POST_VOTE';
+export const UPDATE_TITLE_VOTE = 'UPDATE_TITLE_VOTE';

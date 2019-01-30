@@ -8,7 +8,9 @@ import {
   LOAD_TITLE,
   ADD_TITLE,
   UPDATE_TITLE,
-  DELETE_TITLE
+  DELETE_TITLE,
+  UPDATE_POST_VOTE,
+  UPDATE_TITLE_VOTE
 } from './actionTypes';
 
 const INITIAL_STATE = {
@@ -35,6 +37,21 @@ function rootReducer(state = INITIAL_STATE, action) {
       // replace old post in state
       const newPosts = { ...state.posts, [id]: newPost };
       return { ...state, posts: newPosts };
+    }
+
+    // action for saving existing post to redux-state
+    case UPDATE_POST_VOTE: {
+      const { postId, votes } = action.payload;
+
+      // create updatedPost to overwrite
+      if (state.posts[postId]) {
+        const newPost = { ...state.posts[postId], votes };
+
+        // replace old post in state
+        const newPosts = { ...state.posts, [postId]: newPost };
+        return { ...state, posts: newPosts };
+      }
+      return { ...state };
     }
 
     // action for deleting post in redux-state
@@ -91,6 +108,17 @@ function rootReducer(state = INITIAL_STATE, action) {
       const titleObj = action.payload;
       const newTitles = { ...state.titles, ...titleObj };
       return { ...state, titles: newTitles };
+    }
+
+    // action for adding title to redux-state
+    case UPDATE_TITLE_VOTE: {
+      const { postId, votes } = action.payload;
+      if (state.titles[postId]) {
+        const newTitle = { ...state.titles[postId], votes };
+        const newTitles = { ...state.titles, [postId]: newTitle };
+        return { ...state, titles: newTitles };
+      }
+      return { ...state };
     }
 
     // action for adding title to redux-state

@@ -6,7 +6,8 @@ import {
   updatePostToAPI,
   deleteCommentFromAPI,
   addCommentToAPI,
-  getPostDetailsFromAPI
+  getPostDetailsFromAPI,
+  voteToApi
 } from '../actionCreators';
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
@@ -50,6 +51,11 @@ class PostView extends Component {
     this.props.addCommentToAPI(postId, comment);
   };
 
+  voteAction = dir => {
+    const { postId } = this.props.match.params;
+    this.props.voteToApi(dir, postId);
+  };
+
   render() {
     const { comments } = this.props.post;
     return (
@@ -62,9 +68,12 @@ class PostView extends Component {
           />
         ) : (
           <PostDetails
+            id={this.props.match.params.postId}
             post={this.props.post}
             deletePost={this.deletePost}
             toggleEdit={this.toggleEdit}
+            votes={this.props.voteToApi}
+            voteAction={this.voteAction}
           />
         )}
         {Object.keys(comments).map(id => {
@@ -111,7 +120,8 @@ const connectedComponent = connect(
     updatePostToAPI,
     deleteCommentFromAPI,
     addCommentToAPI,
-    getPostDetailsFromAPI
+    getPostDetailsFromAPI,
+    voteToApi
   }
 );
 

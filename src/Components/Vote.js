@@ -4,23 +4,20 @@ import styled from 'styled-components';
 const StyledVoteContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
-  padding: 20px;
-  border-top: 1px solid lightgray;
+  padding: 20px 0;
 `;
 
 class Vote extends Component {
-  constructor(props) {
-    super(props);
-  }
+  handleUpVote = () => this.props.voteAction('up');
+  handleDownVote = () => this.props.voteAction('down');
 
   render() {
     return (
       <StyledVoteContainer>
         <div>{`${this.props.votes} votes`}</div>
-        <button>UpVote</button>
-        <button>DownVote</button>
+        <button onClick={this.handleUpVote}>UpVote</button>
+        <button onClick={this.handleDownVote}>DownVote</button>
       </StyledVoteContainer>
     );
   }
@@ -31,7 +28,8 @@ class Vote extends Component {
 Vote.propTypes = {};
 
 Vote.defaultProps = {
-  votes: 1
+  votes: 2,
+  voteAction: () => console.log('voting in Vote')
 };
 
 export default Vote;

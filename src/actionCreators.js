@@ -9,7 +9,9 @@ import {
   LOAD_TITLE,
   ADD_TITLE,
   UPDATE_TITLE,
-  DELETE_TITLE
+  DELETE_TITLE,
+  UPDATE_POST_VOTE,
+  UPDATE_TITLE_VOTE
 } from './actionTypes';
 
 const BASE_API_URL = 'http://localhost:5000/api/posts';
@@ -178,6 +180,26 @@ export function addCommentToAPI(postId, comment) {
   };
 }
 
+// action create using thunks to add comment to API
+export function voteToApi(dir, postId) {
+  return async function(dispatch) {
+    try {
+      const res = await axios({
+        url: `${BASE_API_URL}/${postId}/vote/${dir}`,
+        method: 'post'
+      });
+
+      const { votes } = res.data;
+
+      dispatch(updatePostVote(postId, votes));
+      dispatch(updateTitleVote(postId, votes));
+    } catch (error) {
+      console.log('Error getting info from API');
+      console.log(error.message);
+    }
+  };
+}
+
 // action create using thunks to add delete comment API
 export function deleteCommentFromAPI(postId, commentId) {
   return async function(dispatch) {
@@ -191,6 +213,26 @@ export function deleteCommentFromAPI(postId, commentId) {
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
+    }
+  };
+}
+
+export function updatePostVote(postId, votes) {
+  return {
+    type: UPDATE_POST_VOTE,
+    payload: {
+      postId,
+      votes
+    }
+  };
+}
+
+export function updateTitleVote(postId, votes) {
+  return {
+    type: UPDATE_TITLE_VOTE,
+    payload: {
+      postId,
+      votes
     }
   };
 }
