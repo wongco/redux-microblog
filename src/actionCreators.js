@@ -42,7 +42,7 @@ export function getPostDetailsFromAPI(postId) {
   return async function(dispatch) {
     try {
       const res = await axios.get(`${BASE_API_URL}/${postId}`);
-      const { id, comments, votes, ...post } = res.data;
+      const { id, comments, ...post } = res.data;
 
       // convert commentsArr into commentsObj
       const commentsObj = {};
@@ -82,6 +82,7 @@ export function addPostToAPI(postDetails) {
           title,
           description,
           body,
+          votes,
           comments: {}
         }
       };
@@ -114,13 +115,13 @@ export function updatePostToAPI(postId, postDetails) {
         data: postDetails
       });
 
-      const { title, description } = postDetails;
+      const { title, description, votes } = postDetails;
 
       const updateTitleObj = {
         [postId]: {
           title,
           description,
-          votes: 0
+          votes
         }
       };
 
