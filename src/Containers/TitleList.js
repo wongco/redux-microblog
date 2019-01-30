@@ -11,7 +11,7 @@ const StyledTitleList = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
-  margin: 50px;
+  /* margin: 50px; */
 `;
 
 const StyledTitleContainer = styled.div`
@@ -23,6 +23,7 @@ const StyledTitleContainer = styled.div`
   box-shadow: 0px 2px 18px gray;
   box-sizing: border-box;
   padding: 20px;
+  margin: 20px;
 `;
 
 const StyledTitleCard = styled.div`
@@ -42,9 +43,18 @@ class TitleList extends Component {
   }
 
   render() {
+    // sorts title ids by largest amount of votes
+    const titleIdsSorteByVotes = Object.keys(this.props.titles).sort(
+      (prevId, nextId) => {
+        return (
+          this.props.titles[nextId].votes - this.props.titles[prevId].votes
+        );
+      }
+    );
+
     return (
       <StyledTitleList>
-        {Object.keys(this.props.titles).map(id => {
+        {titleIdsSorteByVotes.map(id => {
           const { title, description, votes } = this.props.titles[id];
           return (
             <StyledTitleContainer key={id}>
