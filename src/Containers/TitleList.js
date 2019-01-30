@@ -11,7 +11,6 @@ const StyledTitleList = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
-  /* margin: 50px; */
 `;
 
 const StyledTitleContainer = styled.div`

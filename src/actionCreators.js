@@ -191,7 +191,7 @@ export function voteToApi(dir, postId) {
 
       const { votes } = res.data;
 
-      dispatch(updatePostVote(postId, votes));
+      // dispatch(updatePostVote(postId, votes));
       dispatch(updateTitleVote(postId, votes));
     } catch (error) {
       console.log('Error getting info from API');
