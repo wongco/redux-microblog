@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PostForm from '../Components/PostForm';
-import { addPostToAPI } from '../actionCreators';
+import { addPostToAPI } from '../Actions/posts';
 
 class NewPost extends Component {
   addPost = postDetails => {

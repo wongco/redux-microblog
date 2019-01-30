@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getTitlesFromAPI, voteToApi } from '../actionCreators';
+import { getTitlesFromAPI } from '../Actions/titles';
+import { voteToApi } from '../Actions/posts';
 import Vote from '../Components/Vote';
 
 const StyledTitleList = styled.div`

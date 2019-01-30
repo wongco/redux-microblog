@@ -1,10 +1,10 @@
 import {
   LOAD_TITLE,
-  ADD_TITLE,
-  UPDATE_TITLE,
-  DELETE_TITLE,
-  UPDATE_TITLE_VOTE
-} from '../actionTypes';
+  UPDATE_VOTE,
+  ADD_POST,
+  UPDATE_POST,
+  DELETE_POST
+} from '../Actions/types';
 
 function rootReducer(state = {}, action) {
   switch (action.type) {
@@ -15,21 +15,33 @@ function rootReducer(state = {}, action) {
     }
 
     // action for adding title to redux-state
-    case ADD_TITLE: {
-      const titleObj = action.payload;
+    case ADD_POST: {
+      const { id, postDetails } = action.payload;
+      const { body, comments, ...titleDetails } = postDetails;
+      const titleObj = { [id]: titleDetails };
       const newTitles = { ...state, ...titleObj };
       return { ...newTitles };
     }
 
     // action for adding title to redux-state
-    case UPDATE_TITLE: {
-      const titleObj = action.payload;
+    case UPDATE_POST: {
+      const { id, postDetails } = action.payload;
+      const { body, comments, ...titleDetails } = postDetails;
+      const titleObj = { [id]: titleDetails };
       const newTitles = { ...state, ...titleObj };
       return { ...newTitles };
     }
 
     // action for adding title to redux-state
-    case UPDATE_TITLE_VOTE: {
+    case DELETE_POST: {
+      const { id } = action.payload;
+      const newTitles = { ...state };
+      delete newTitles[id];
+      return { ...newTitles };
+    }
+
+    // action for adding title to redux-state
+    case UPDATE_VOTE: {
       const { postId, votes } = action.payload;
       if (state[postId]) {
         const newTitle = { ...state[postId], votes };
@@ -37,14 +49,6 @@ function rootReducer(state = {}, action) {
         return { ...newTitles };
       }
       return { ...state };
-    }
-
-    // action for adding title to redux-state
-    case DELETE_TITLE: {
-      const { postId } = action.payload;
-      const newTitles = { ...state };
-      delete newTitles[postId];
-      return { ...newTitles };
     }
 
     default: {

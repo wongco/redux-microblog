@@ -5,24 +5,25 @@ import {
   DELETE_COMMENT,
   ADD_COMMENT,
   LOAD_POST,
-  UPDATE_POST_VOTE
-} from '../actionTypes';
+  UPDATE_VOTE
+} from '../Actions/types';
 
 function rootReducer(state = {}, action) {
   switch (action.type) {
     // action for adding new post to redux-state
     case ADD_POST: {
-      const newPost = action.payload;
+      const { id, postDetails } = action.payload;
+      const newPost = { [id]: postDetails };
       const newPosts = { ...state, ...newPost };
       return { ...newPosts };
     }
 
     // action for saving existing post to redux-state
     case UPDATE_POST: {
-      const { id, post } = action.payload;
+      const { id, postDetails } = action.payload;
 
       // create updatedPost to overwrite
-      const newPost = { ...state[id], ...post };
+      const newPost = { ...state[id], ...postDetails };
 
       // replace old post in state
       const newPosts = { ...state, [id]: newPost };
@@ -30,7 +31,7 @@ function rootReducer(state = {}, action) {
     }
 
     // action for saving existing post to redux-state
-    case UPDATE_POST_VOTE: {
+    case UPDATE_VOTE: {
       const { postId, votes } = action.payload;
 
       // create updatedPost to overwrite

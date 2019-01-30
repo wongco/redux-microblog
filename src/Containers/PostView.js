@@ -8,7 +8,7 @@ import {
   addCommentToAPI,
   getPostDetailsFromAPI,
   voteToApi
-} from '../actionCreators';
+} from '../Actions/posts';
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
 import NewComment from '../Components/NewComment';

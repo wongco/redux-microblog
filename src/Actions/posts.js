@@ -6,38 +6,10 @@ import {
   DELETE_COMMENT,
   ADD_COMMENT,
   LOAD_POST,
-  LOAD_TITLE,
-  ADD_TITLE,
-  UPDATE_TITLE,
-  DELETE_TITLE,
-  UPDATE_POST_VOTE,
-  UPDATE_TITLE_VOTE
-} from './actionTypes';
+  UPDATE_VOTE
+} from './types';
 
 const BASE_API_URL = 'http://localhost:5000/api/posts';
-
-// action creator using thunks to grab info from API
-export function getTitlesFromAPI() {
-  return async function(dispatch) {
-    try {
-      const res = await axios.get(`${BASE_API_URL}`);
-      const titlesArr = res.data;
-      const titles = {};
-      titlesArr.forEach(post => {
-        const { id, title, description, votes } = post;
-        titles[id] = {
-          title,
-          description,
-          votes
-        };
-      });
-      dispatch(loadTitles(titles));
-    } catch (error) {
-      console.log('Error getting info from API');
-      console.log(error.message);
-    }
-  };
-}
 
 // action create using thunks to get Post Detail Info from API
 export function getPostDetailsFromAPI(postId) {
@@ -79,27 +51,15 @@ export function addPostToAPI(postDetails) {
       const { id, votes, title, description, body } = res.data;
 
       // create formatted new post for insertion into redux state
-      const newPost = {
-        [id]: {
-          title,
-          description,
-          body,
-          votes,
-          comments: {}
-        }
+      const postOb = {
+        title,
+        description,
+        body,
+        votes,
+        comments: {}
       };
 
-      // create formatted new title for insertion into redux state
-      const newTitle = {
-        [id]: {
-          title,
-          description,
-          votes
-        }
-      };
-
-      dispatch(addPost(newPost));
-      dispatch(addTitle(newTitle));
+      dispatch(addPost(id, postOb));
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
@@ -117,18 +77,7 @@ export function updatePostToAPI(postId, postDetails) {
         data: postDetails
       });
 
-      const { title, description, votes } = postDetails;
-
-      const updateTitleObj = {
-        [postId]: {
-          title,
-          description,
-          votes
-        }
-      };
-
       dispatch(updatePost(postId, postDetails));
-      dispatch(updateTitle(updateTitleObj));
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
@@ -146,7 +95,6 @@ export function deletePostFromAPI(postId) {
       });
 
       dispatch(deletePost(postId));
-      dispatch(deleteTitle(postId));
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
@@ -191,8 +139,7 @@ export function voteToApi(dir, postId) {
 
       const { votes } = res.data;
 
-      // dispatch(updatePostVote(postId, votes));
-      dispatch(updateTitleVote(postId, votes));
+      dispatch(updateVote(postId, votes));
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
@@ -217,19 +164,9 @@ export function deleteCommentFromAPI(postId, commentId) {
   };
 }
 
-export function updatePostVote(postId, votes) {
+export function updateVote(postId, votes) {
   return {
-    type: UPDATE_POST_VOTE,
-    payload: {
-      postId,
-      votes
-    }
-  };
-}
-
-export function updateTitleVote(postId, votes) {
-  return {
-    type: UPDATE_TITLE_VOTE,
+    type: UPDATE_VOTE,
     payload: {
       postId,
       votes
@@ -244,49 +181,22 @@ export function loadPost(postDetails) {
   };
 }
 
-export function loadTitles(titles) {
+export function addPost(id, postDetails) {
   return {
-    type: LOAD_TITLE,
-    payload: titles
-  };
-}
-
-export function addTitle(titleObj) {
-  return {
-    type: ADD_TITLE,
-    payload: titleObj
-  };
-}
-
-export function deleteTitle(postId) {
-  return {
-    type: DELETE_TITLE,
+    type: ADD_POST,
     payload: {
-      postId
+      id,
+      postDetails
     }
   };
 }
 
-export function updateTitle(titleObj) {
-  return {
-    type: UPDATE_TITLE,
-    payload: titleObj
-  };
-}
-
-export function addPost(postDetails) {
-  return {
-    type: ADD_POST,
-    payload: postDetails
-  };
-}
-
-export function updatePost(id, post) {
+export function updatePost(id, postDetails) {
   return {
     type: UPDATE_POST,
     payload: {
       id,
-      post
+      postDetails
     }
   };
 }
