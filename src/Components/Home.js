@@ -9,14 +9,18 @@ const StyledHome = styled.div`
   width: 100%;
 `;
 
+const StyledHeader = styled.p`
+  padding: 0 1em;
+`;
+
 class Home extends Component {
   render() {
     return (
       <StyledHome>
-        <p>
+        <StyledHeader>
           Welcome to <b>Microblog</b>, our innovative site for communicating on
           the information superhighway.
-        </p>
+        </StyledHeader>
         <TitleList />
       </StyledHome>
     );

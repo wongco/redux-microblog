@@ -4,14 +4,14 @@ import styled from 'styled-components';
 
 const StyledNav = styled.div`
   display: flex;
-  box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   background-color: lightgray;
   width: 100%;
-  border-radius: 5px;
-  padding: 50px 50px;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 18px gray;
+  padding: 3em;
 `;
 
 const StyledNavTitle = styled.p`

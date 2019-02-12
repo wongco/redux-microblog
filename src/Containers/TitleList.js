@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { getTitlesFromAPI } from '../Actions/titles';
 import { voteToApi } from '../Actions/posts';
 import Vote from '../Components/Vote';
+import bgimg from '../Pics/blogbg.jpg';
 
 const StyledTitleList = styled.div`
   display: flex;
@@ -24,6 +25,12 @@ const StyledTitleContainer = styled.div`
   box-sizing: border-box;
   padding: 20px;
   margin: 20px;
+
+  background: url(${bgimg});
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: lighten;
 `;
 
 const StyledTitleCard = styled.div`
@@ -33,6 +40,7 @@ const StyledTitleCard = styled.div`
   border-bottom: 1px solid lightgray;
   height: 75px;
   width: 20vw;
+  font-size: 1.15em;
 `;
 
 class TitleList extends Component {
