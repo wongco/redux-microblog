@@ -21,7 +21,7 @@ class Vote extends Component {
       <StyledVoteContainer>
         <div>{`${this.props.votes} votes`}</div>
         <FontAwesomeIcon
-          style={{ color: 'darkgreen', cursor: 'pointer' }}
+          style={{ color: 'blue', cursor: 'pointer' }}
           icon={faThumbsUp}
           onClick={this.handleUpVote}
         />

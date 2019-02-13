@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 
-const StyledComment = styled.div`
+const StyledCommentContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 `;
 
-const StyledButton = styled.button`
-  border-radius: 5px;
-  padding: 5px;
-  margin-right: 5px;
+const StyledComment = styled.div`
+  padding: 10px;
 `;
 
 class Comment extends Component {
@@ -21,10 +21,14 @@ class Comment extends Component {
 
   render() {
     return (
-      <StyledComment>
-        <StyledButton onClick={this.handleDelete}>Delete</StyledButton>
-        <p>{this.props.comment}</p>
-      </StyledComment>
+      <StyledCommentContainer>
+        <FontAwesomeIcon
+          style={{ color: 'red', cursor: 'pointer' }}
+          icon={faTimesCircle}
+          onClick={this.handleDelete}
+        />
+        <StyledComment>{this.props.comment}</StyledComment>
+      </StyledCommentContainer>
     );
   }
 }

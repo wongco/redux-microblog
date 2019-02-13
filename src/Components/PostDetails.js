@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Vote from '../Components/Vote';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 const StyledPostDetail = styled.div`
   width: 50vw;
@@ -27,6 +29,13 @@ const StyledHeader2 = styled.div`
   justify-content: space-between;
   padding: 0;
 `;
+
+const StyledModifyContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 75px;
+`;
 class PostDetails extends Component {
   render() {
     const { title, description, body, votes } = this.props.post;
@@ -35,13 +44,23 @@ class PostDetails extends Component {
         <StyledTop>
           <StyledHeader>
             <h1>{title}</h1>
-            <div>
-              <button onClick={this.props.toggleEdit}>Edit Post</button>
-              <button onClick={this.props.deletePost}>Delete Post</button>
-            </div>
+            <StyledModifyContainer>
+              <FontAwesomeIcon
+                style={{ color: 'orange', cursor: 'pointer' }}
+                icon={faEdit}
+                onClick={this.props.toggleEdit}
+                size={'2x'}
+              />
+              <FontAwesomeIcon
+                style={{ color: 'red', cursor: 'pointer' }}
+                icon={faTrashAlt}
+                onClick={this.props.deletePost}
+                size={'2x'}
+              />
+            </StyledModifyContainer>
           </StyledHeader>
           <StyledHeader2>
-            <div>{description}</div>
+            <h3>{description}</h3>
             <Vote votes={votes} voteAction={this.props.voteAction} />
           </StyledHeader2>
         </StyledTop>
