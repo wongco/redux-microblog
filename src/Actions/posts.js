@@ -8,8 +8,8 @@ import {
   LOAD_POST,
   UPDATE_VOTE
 } from './types';
-
-const BASE_API_URL = 'http://localhost:5000/api/posts';
+import { BASE_API_URL } from '../config';
+// const BASE_API_URL = 'http://localhost:5000/api/posts';
 
 // action create using thunks to get Post Detail Info from API
 export function getPostDetailsFromAPI(postId) {

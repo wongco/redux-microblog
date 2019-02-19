@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LOAD_TITLE } from './types';
-
-const BASE_API_URL = 'http://localhost:5000/api/posts';
+import { BASE_API_URL } from '../config';
+// const BASE_API_URL = 'http://localhost:5000/api/posts';
 
 // action creator using thunks to grab info from API
 export function getTitlesFromAPI() {
