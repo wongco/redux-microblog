@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { LOAD_TITLE } from './types';
 import { BASE_API_URL } from '../config';
-// const BASE_API_URL = 'http://localhost:5000/api/posts';
 
 // action creator using thunks to grab info from API
 export function getTitlesFromAPI() {
   return async function(dispatch) {
     try {
-      const res = await axios.get(`${BASE_API_URL}`);
+      const res = await axios.get(`${BASE_API_URL}/api/posts`);
       const titlesArr = res.data;
       const titles = {};
       titlesArr.forEach(post => {

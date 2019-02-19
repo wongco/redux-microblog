@@ -9,13 +9,12 @@ import {
   UPDATE_VOTE
 } from './types';
 import { BASE_API_URL } from '../config';
-// const BASE_API_URL = 'http://localhost:5000/api/posts';
 
 // action create using thunks to get Post Detail Info from API
 export function getPostDetailsFromAPI(postId) {
   return async function(dispatch) {
     try {
-      const res = await axios.get(`${BASE_API_URL}/${postId}`);
+      const res = await axios.get(`${BASE_API_URL}/api/posts/${postId}`);
       const { id, comments, ...post } = res.data;
 
       // convert commentsArr into commentsObj
@@ -44,7 +43,7 @@ export function addPostToAPI(postDetails) {
   return async function(dispatch) {
     try {
       const res = await axios({
-        url: `${BASE_API_URL}/`,
+        url: `${BASE_API_URL}/api/posts/`,
         method: 'post',
         data: postDetails
       });
@@ -72,7 +71,7 @@ export function updatePostToAPI(postId, postDetails) {
   return async function(dispatch) {
     try {
       await axios({
-        url: `${BASE_API_URL}/${postId}`,
+        url: `${BASE_API_URL}/api/posts/${postId}`,
         method: 'put',
         data: postDetails
       });
@@ -90,7 +89,7 @@ export function deletePostFromAPI(postId) {
   return async function(dispatch) {
     try {
       await axios({
-        url: `${BASE_API_URL}/${postId}`,
+        url: `${BASE_API_URL}/api/posts/${postId}`,
         method: 'delete'
       });
 
@@ -107,7 +106,7 @@ export function addCommentToAPI(postId, comment) {
   return async function(dispatch) {
     try {
       const res = await axios({
-        url: `${BASE_API_URL}/${postId}/comments`,
+        url: `${BASE_API_URL}/api/posts/${postId}/comments`,
         method: 'post',
         data: {
           text: comment
@@ -133,7 +132,7 @@ export function voteToApi(dir, postId) {
   return async function(dispatch) {
     try {
       const res = await axios({
-        url: `${BASE_API_URL}/${postId}/vote/${dir}`,
+        url: `${BASE_API_URL}/api/posts/${postId}/vote/${dir}`,
         method: 'post'
       });
 
@@ -152,7 +151,7 @@ export function deleteCommentFromAPI(postId, commentId) {
   return async function(dispatch) {
     try {
       await axios({
-        url: `${BASE_API_URL}/${postId}/comments/${commentId}`,
+        url: `${BASE_API_URL}/api/posts/${postId}/comments/${commentId}`,
         method: 'delete'
       });
 
