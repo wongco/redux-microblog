@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for default criteria 1`] = `
+<styled.div>
+  <div>
+    <styled.p>
+      Microblog
+    </styled.p>
+    <p>
+      Get in the Rithm of Blogging!
+    </p>
+  </div>
+  <styled.div>
+    <Styled(NavLink)
+      to="/"
+    >
+      Blog
+    </Styled(NavLink)>
+    <Styled(NavLink)
+      to="/new"
+    >
+      Add a new post
+    </Styled(NavLink)>
+  </styled.div>
+</styled.div>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for default criteria 1`] = `
+<styled.div>
+  <styled.p>
+    Welcome to 
+    <b>
+      Microblog
+    </b>
+    , our innovative site for communicating on the information superhighway.
+  </styled.p>
+  <Connect(TitleList) />
+</styled.div>
+`;

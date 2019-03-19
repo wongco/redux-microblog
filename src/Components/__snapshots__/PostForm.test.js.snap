@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for default criteria 1`] = `
+<div
+  className="PostForm"
+>
+  <styled.form
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="title"
+    >
+      Title
+    </label>
+    <styled.input
+      name="title"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      htmlFor="desc"
+    >
+      Description
+    </label>
+    <styled.input
+      name="description"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      htmlFor="body"
+    >
+      Body
+    </label>
+    <styled.textarea
+      name="body"
+      onChange={[Function]}
+      rows={10}
+      value=""
+    />
+    <div>
+      <styled.button>
+        Save
+      </styled.button>
+      <styled.button
+        onClick={[Function]}
+        type="button"
+      >
+        Cancel
+      </styled.button>
+    </div>
+  </styled.form>
+</div>
+`;

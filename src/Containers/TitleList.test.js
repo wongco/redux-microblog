@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import App from './App';
+import TitleList from './TitleList';
 
 it('renders without crashing', () => {
-  shallow(<App />);
+  shallow(<TitleList />);
 });
 
 it('matches snapshot for default criteria', () => {
-  const wrapper = shallow(<App />);
+  const wrapper = shallow(<TitleList />);
   const serialized = toJson(wrapper);
   expect(serialized).toMatchSnapshot();
 });

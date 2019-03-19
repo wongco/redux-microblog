@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for default criteria 1`] = `
+<div
+  className="NewComment"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="comment"
+      onChange={[Function]}
+      placeholder="New Comment"
+      type="text"
+      value=""
+    />
+    <button>
+      Add
+    </button>
+  </form>
+</div>
+`;
