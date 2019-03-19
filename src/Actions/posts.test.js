@@ -196,6 +196,10 @@ describe('posts thunk actions', () => {
             {
               id: 7,
               text: 'WonderBoo!'
+            },
+            {
+              id: 8,
+              text: 'Wow!'
             }
           ]
         }
@@ -209,7 +213,8 @@ describe('posts thunk actions', () => {
         body: 'Everyone loves posting first. I win!',
         votes: 0,
         comments: {
-          7: 'WonderBoo!'
+          7: 'WonderBoo!',
+          8: 'Wow!'
         }
       }
     };
