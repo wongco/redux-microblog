@@ -36,9 +36,10 @@ Vist a live version of Microblog [here](https://wongco-microblog.herokuapp.com/)
 
 ## Testing Stack
 
-- Jest
-- Enzyme
-- redux-mock-store
+- Jest - testing framework
+- Enzyme - component testing
+- Redux-mock-store - redux store mocking library
+- Prop-types - prop type definition validation
 
 ## Author
 

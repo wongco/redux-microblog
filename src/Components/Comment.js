@@ -16,6 +16,7 @@ const StyledComment = styled.div`
 `;
 
 class Comment extends Component {
+  // handles delete action for specific comment
   handleDelete = () => {
     this.props.deleteComment(this.props.id);
   };
