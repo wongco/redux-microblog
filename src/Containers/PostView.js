@@ -12,7 +12,6 @@ import {
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
 import NewComment from '../Components/NewComment';
-// import styled from 'styled-components';
 
 class PostView extends Component {
   componentDidMount() {

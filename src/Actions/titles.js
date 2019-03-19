@@ -2,7 +2,7 @@ import axios from 'axios';
 import { LOAD_TITLE } from './types';
 import { BASE_API_URL } from '../config';
 
-// action creator using thunks to grab info from API
+// thunk to retrieve all posts basic info from API
 export function getTitlesFromAPI() {
   return async function(dispatch) {
     try {
@@ -25,6 +25,7 @@ export function getTitlesFromAPI() {
   };
 }
 
+// action creators
 export function loadTitles(titles) {
   return {
     type: LOAD_TITLE,

@@ -10,7 +10,7 @@ import {
 } from './types';
 import { BASE_API_URL } from '../config';
 
-// action create using thunks to get Post Detail Info from API
+// thunk to get Post Detail Info from API
 export function getPostDetailsFromAPI(postId) {
   return async function(dispatch) {
     try {
@@ -38,7 +38,7 @@ export function getPostDetailsFromAPI(postId) {
   };
 }
 
-// action create using thunks to get Post Detail Info from API
+// thunk to add Post Detail Info to API
 export function addPostToAPI(postDetails) {
   return async function(dispatch) {
     try {
@@ -50,7 +50,7 @@ export function addPostToAPI(postDetails) {
       const { id, votes, title, description, body } = res.data;
 
       // create formatted new post for insertion into redux state
-      const postOb = {
+      const postObj = {
         title,
         description,
         body,
@@ -58,7 +58,7 @@ export function addPostToAPI(postDetails) {
         comments: {}
       };
 
-      dispatch(addPost(id, postOb));
+      dispatch(addPost(id, postObj));
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
@@ -66,7 +66,7 @@ export function addPostToAPI(postDetails) {
   };
 }
 
-// action create using thunks to update Post Detail Info to API
+// thunk for updating Post Detail Info to API
 export function updatePostToAPI(postId, postDetails) {
   return async function(dispatch) {
     try {
@@ -84,7 +84,7 @@ export function updatePostToAPI(postId, postDetails) {
   };
 }
 
-// action create using thunks to delete Post from API
+// thunk for deleting Post from API
 export function deletePostFromAPI(postId) {
   return async function(dispatch) {
     try {
@@ -101,7 +101,7 @@ export function deletePostFromAPI(postId) {
   };
 }
 
-// action create using thunks to add comment to API
+// thunk for adding comment to specific post on API
 export function addCommentToAPI(postId, comment) {
   return async function(dispatch) {
     try {
@@ -127,7 +127,7 @@ export function addCommentToAPI(postId, comment) {
   };
 }
 
-// action create using thunks to add comment to API
+// thunk for updating vote count on specific post to API
 export function voteToApi(dir, postId) {
   return async function(dispatch) {
     try {
@@ -146,7 +146,7 @@ export function voteToApi(dir, postId) {
   };
 }
 
-// action create using thunks to add delete comment API
+// thunk for deleting comment from specific post to API
 export function deleteCommentFromAPI(postId, commentId) {
   return async function(dispatch) {
     try {
@@ -163,6 +163,7 @@ export function deleteCommentFromAPI(postId, commentId) {
   };
 }
 
+/** Action Creators */
 export function updateVote(postId, votes) {
   return {
     type: UPDATE_VOTE,
@@ -209,22 +210,22 @@ export function deletePost(id) {
   };
 }
 
-export function deleteComment(postId, commentId) {
-  return {
-    type: DELETE_COMMENT,
-    payload: {
-      postId,
-      commentId
-    }
-  };
-}
-
 export function addComment(postId, commentObj) {
   return {
     type: ADD_COMMENT,
     payload: {
       postId,
       commentObj
+    }
+  };
+}
+
+export function deleteComment(postId, commentId) {
+  return {
+    type: DELETE_COMMENT,
+    payload: {
+      postId,
+      commentId
     }
   };
 }
