@@ -41,6 +41,13 @@ Vist a live version of Microblog [here](https://wongco-microblog.herokuapp.com/)
 - Redux-mock-store - redux store mocking library
 - Prop-types - prop type definition validation
 
+# Future Features
+
+- User Authentication
+- Restricted Voting (One vote per user)
+- Public/Private Blog Posts
+- CSS Styling
+
 ## Author
 
 WongCo - [https://github.com/wongco](https://github.com/wongco)
