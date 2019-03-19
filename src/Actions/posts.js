@@ -34,6 +34,7 @@ export function getPostDetailsFromAPI(postId) {
     } catch (error) {
       console.log('Error getting info from API');
       console.log(error.message);
+      throw error;
     }
   };
 }

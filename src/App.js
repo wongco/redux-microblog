@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Routes from '../Routes';
+import Routes from './Routes';
 import styled from 'styled-components';
 
 const StyledApp = styled.div`

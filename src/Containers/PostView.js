@@ -14,12 +14,19 @@ import Comment from '../Components/Comment';
 import NewComment from '../Components/NewComment';
 
 class PostView extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { postId } = this.props.match.params;
 
     // if post doesnt exist in redux state, make api call to obtain it
     if (this.props.post.title.length === 0) {
-      this.props.getPostDetailsFromAPI(postId);
+      try {
+        await this.props.getPostDetailsFromAPI(postId);
+      } catch (error) {
+        this.setState({
+          error: true,
+          errorMessage: 'Post does not exist.'
+        });
+      }
     }
   }
 
@@ -56,7 +63,27 @@ class PostView extends Component {
   };
 
   render() {
-    const { comments } = this.props.post;
+    const { comments, title } = this.props.post;
+
+    // check for errors
+    if (this.state.error) {
+      return (
+        <div>
+          <h1>{this.state.errorMessage}</h1>
+        </div>
+      );
+    }
+
+    // check if post has been loaded yet
+    if (title.length === 0) {
+      return (
+        <div>
+          <h1>Loading Blog Entry...</h1>
+        </div>
+      );
+    }
+
+    // post has successfully loaded. swap between render views
     return (
       <div>
         {this.state.isEditing ? (
@@ -91,7 +118,9 @@ class PostView extends Component {
   }
 
   state = {
-    isEditing: false
+    isEditing: false,
+    error: false,
+    errorMessage: ''
   };
 }
 
