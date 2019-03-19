@@ -23,7 +23,7 @@ function rootReducer(state = {}, action) {
       return { ...newTitles };
     }
 
-    // action for adding title to redux-state
+    // action for updating title to redux-state
     case UPDATE_POST: {
       const { id, postDetails } = action.payload;
       const { body, comments, ...titleDetails } = postDetails;
@@ -32,7 +32,7 @@ function rootReducer(state = {}, action) {
       return { ...newTitles };
     }
 
-    // action for adding title to redux-state
+    // action for deleting title to redux-state
     case DELETE_POST: {
       const { id } = action.payload;
       const newTitles = { ...state };
@@ -40,7 +40,7 @@ function rootReducer(state = {}, action) {
       return { ...newTitles };
     }
 
-    // action for adding title to redux-state
+    // action for updating vote total to redux-state
     case UPDATE_VOTE: {
       const { postId, votes } = action.payload;
       if (state[postId]) {
