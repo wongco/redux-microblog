@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 import styled from 'styled-components';
 import NewPost from './Containers/NewPost';
@@ -26,7 +26,7 @@ class Routes extends Component {
             path="/:postId"
             render={props => <PostView {...props} />}
           />
-          <Route render={() => <div>CatchAllRoute</div>} />
+          <Redirect to="/" />
         </Switch>
       </StyledRoutes>
     );
