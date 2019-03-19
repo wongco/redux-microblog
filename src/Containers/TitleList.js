@@ -49,15 +49,12 @@ class TitleList extends Component {
   async componentDidMount() {
     if (Object.keys(this.props.titles).length === 0) {
       await this.props.getTitlesFromAPI();
-      this.setState({
-        isLoading: false
-      });
     }
   }
 
   render() {
     // wait for titles to be pulled from API
-    if (this.state.isLoading) {
+    if (Object.keys(this.props.titles).length === 0) {
       return (
         <div>
           <h1>Loading Blog Posts...</h1>
@@ -97,10 +94,6 @@ class TitleList extends Component {
       </StyledTitleList>
     );
   }
-
-  state = {
-    isLoading: true
-  };
 }
 
 TitleList.propTypes = {
