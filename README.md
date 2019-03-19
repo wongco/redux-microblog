@@ -1,6 +1,8 @@
-# react-microblog
+# redux-microblog
 
-react-microblog is a React front end for a microblogging web application. It is built with JavaScript, React, React Router, Redux, Redux-thunk, Styled Components and static assets.
+redux-microblog is a React front end for a microblogging web application. It is built with JavaScript, React, React Router, Redux, Redux-thunk, Styled Components and static assets.
+
+Vist a live version of Microblog [here](https://wongco-microblog.herokuapp.com/)
 
 ## Prerequisites
 
