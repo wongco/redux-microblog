@@ -10,7 +10,7 @@ import {
 
 import * as actions from './posts';
 
-describe('post redux actions', () => {
+describe('posts redux actions', () => {
   it('should create an action to update vote on a post correctly', () => {
     const payload = {
       postId: 100,
