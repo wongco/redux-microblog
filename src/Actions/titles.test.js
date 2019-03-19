@@ -1,14 +1,15 @@
 import * as actions from './titles';
 import { LOAD_TITLE } from './types';
 
+// configuration for mock redux store with thunks enabled
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-// mock axios call for thunk testing
-jest.mock('axios');
-
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+
+// mock axios library for thunk testing
+jest.mock('axios');
 
 describe('titles redux actions', () => {
   it('should create an action load post titles correctly', () => {
@@ -49,7 +50,6 @@ describe('titles thunk actions', () => {
         ]
       });
     });
-
     const expectedActions = [
       {
         type: LOAD_TITLE,
@@ -67,10 +67,9 @@ describe('titles thunk actions', () => {
         }
       }
     ];
-
-    // default state of mock redux store
+    // initialize mock redux store with initial state
     const store = mockStore({ titles: {} });
-
+    // invoke thunk action creator and compare expected dispatch Actions
     return store.dispatch(actions.getTitlesFromAPI()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
