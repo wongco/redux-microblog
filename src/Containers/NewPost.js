@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import PostForm from '../Components/PostForm';
 import { addPostToAPI } from '../Actions/posts';
+import PropTypes from 'prop-types';
 
 class NewPost extends Component {
   addPost = postDetails => {
@@ -10,6 +11,7 @@ class NewPost extends Component {
     this.props.history.push('/');
   };
 
+  // returns user to home page upon canceling
   cancel = () => this.props.history.push('/');
 
   render() {
@@ -21,6 +23,13 @@ class NewPost extends Component {
     );
   }
 }
+
+NewPost.propTypes = {
+  addPostToAPI: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
+};
 
 const connectedComponent = connect(
   null,

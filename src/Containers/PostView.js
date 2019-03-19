@@ -12,6 +12,7 @@ import {
 import PostForm from '../Components/PostForm';
 import Comment from '../Components/Comment';
 import NewComment from '../Components/NewComment';
+import PropTypes from 'prop-types';
 
 class PostView extends Component {
   async componentDidMount() {
@@ -35,28 +36,33 @@ class PostView extends Component {
     this.setState(st => ({ isEditing: !st.isEditing }));
   };
 
+  // removes post from API & redux
   deletePost = () => {
     const { postId } = this.props.match.params;
     this.props.deletePostFromAPI(postId);
     this.props.history.replace('/');
   };
 
+  // updates post to API & redux
   savePost = post => {
     const { postId } = this.props.match.params;
     this.props.updatePostToAPI(postId, post);
     this.props.history.replace('/');
   };
 
+  // deletes comment from specific post from API & redux
   deleteComment = commentId => {
     const { postId } = this.props.match.params;
     this.props.deleteCommentFromAPI(postId, commentId);
   };
 
+  // adds comment to specific post to API & redux
   addComment = comment => {
     const { postId } = this.props.match.params;
     this.props.addCommentToAPI(postId, comment);
   };
 
+  // increments or decrements vote total to API & redux
   voteAction = dir => {
     const { postId } = this.props.match.params;
     this.props.voteToApi(dir, postId);
@@ -65,7 +71,7 @@ class PostView extends Component {
   render() {
     const { comments, title } = this.props.post;
 
-    // check for errors
+    // check for errors - non existent post
     if (this.state.error) {
       return (
         <div>
@@ -74,7 +80,7 @@ class PostView extends Component {
       );
     }
 
-    // check if post has been loaded yet
+    // check if post has been loaded yet (future spinner)
     if (title.length === 0) {
       return (
         <div>
@@ -83,7 +89,7 @@ class PostView extends Component {
       );
     }
 
-    // post has successfully loaded. swap between render views
+    // post has successfully loaded - load normal views
     return (
       <div>
         {this.state.isEditing ? (
@@ -123,6 +129,20 @@ class PostView extends Component {
     errorMessage: ''
   };
 }
+
+PostView.propTypes = {
+  post: PropTypes.object,
+  getPost: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  deletePostFromAPI: PropTypes.func,
+  updatePostToAPI: PropTypes.func,
+  deleteCommentFromAPI: PropTypes.func,
+  addCommentToAPI: PropTypes.func,
+  getPostDetailsFromAPI: PropTypes.func,
+  voteToApi: PropTypes.func
+};
 
 PostView.defaultProps = {
   post: {

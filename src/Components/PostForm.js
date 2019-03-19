@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledForm = styled.form`
   display: flex;
@@ -82,7 +83,11 @@ class PostForm extends Component {
   };
 }
 
-PostForm.propTypes = {};
+PostForm.propTypes = {
+  post: PropTypes.object,
+  savePost: PropTypes.func,
+  cancel: PropTypes.func
+};
 
 PostForm.defaultProps = {
   post: {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import PropTypes from 'prop-types';
 
 const StyledCommentContainer = styled.div`
   display: flex;
@@ -33,7 +34,11 @@ class Comment extends Component {
   }
 }
 
-Comment.propTypes = {};
+Comment.propTypes = {
+  id: PropTypes.string,
+  comment: PropTypes.string,
+  deleteComment: PropTypes.func
+};
 
 Comment.defaultProps = {
   id: '12',

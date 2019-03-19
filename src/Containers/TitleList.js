@@ -6,6 +6,7 @@ import { getTitlesFromAPI } from '../Actions/titles';
 import { voteToApi } from '../Actions/posts';
 import Vote from '../Components/Vote';
 import bgimg from '../Pics/blogbg.jpg';
+import PropTypes from 'prop-types';
 
 const StyledTitleList = styled.div`
   display: flex;
@@ -44,6 +45,7 @@ const StyledTitleCard = styled.div`
 `;
 
 class TitleList extends Component {
+  // if titles is empty in redux, obtain from API
   async componentDidMount() {
     if (Object.keys(this.props.titles).length === 0) {
       await this.props.getTitlesFromAPI();
@@ -84,6 +86,12 @@ class TitleList extends Component {
     );
   }
 }
+
+TitleList.propTypes = {
+  titles: PropTypes.object,
+  getTitlesFromAPI: PropTypes.func,
+  voteToApi: PropTypes.func
+};
 
 function mapStateToProps(state) {
   return {

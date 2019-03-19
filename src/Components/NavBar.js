@@ -46,12 +46,6 @@ class NavBar extends Component {
       </StyledNav>
     );
   }
-
-  state = {};
 }
-
-NavBar.propTypes = {};
-
-NavBar.defaultProps = {};
 
 export default NavBar;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Vote from '../Components/Vote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import PropTypes from 'prop-types';
 
 const StyledPostDetail = styled.div`
   width: 50vw;
@@ -69,6 +70,13 @@ class PostDetails extends Component {
     );
   }
 }
+
+PostDetails.propTypes = {
+  post: PropTypes.object,
+  toggleEdit: PropTypes.func,
+  deletePost: PropTypes.func,
+  voteAction: PropTypes.func
+};
 
 PostDetails.defaultProps = {
   post: {

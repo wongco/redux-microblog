@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-//import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 class NewComment extends Component {
+  // handler for submit event from DOM
   handleSubmit = evt => {
     evt.preventDefault();
     this.props.addComment(this.state.comment);
     this.setState({ comment: '' });
   };
 
+  // controlled component handling
   handleChange = evt => {
     // runs on every keystroke
     this.setState({
@@ -37,7 +39,9 @@ class NewComment extends Component {
   };
 }
 
-NewComment.propTypes = {};
+NewComment.propTypes = {
+  addComment: PropTypes.func
+};
 
 NewComment.defaultProps = {
   addComment: () => console.log('Adding new comment')

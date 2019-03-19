@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
+import PropTypes from 'prop-types';
 
 const StyledVoteContainer = styled.div`
   display: flex;
@@ -13,6 +14,7 @@ const StyledVoteContainer = styled.div`
 `;
 
 class Vote extends Component {
+  // handlers for vote increment and decrement actions
   handleUpVote = () => this.props.voteAction('up');
   handleDownVote = () => this.props.voteAction('down');
 
@@ -37,7 +39,10 @@ class Vote extends Component {
   state = {};
 }
 
-Vote.propTypes = {};
+Vote.propTypes = {
+  votes: PropTypes.number,
+  voteAction: PropTypes.func
+};
 
 Vote.defaultProps = {
   votes: 2,

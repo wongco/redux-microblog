@@ -9,6 +9,8 @@ export function getTitlesFromAPI() {
       const res = await axios.get(`${BASE_API_URL}/api/posts`);
       const titlesArr = res.data;
       const titles = {};
+
+      // convert title Data from Arr to Object for faster access
       titlesArr.forEach(post => {
         const { id, title, description, votes } = post;
         titles[id] = {
